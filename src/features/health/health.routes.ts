@@ -1,13 +1,15 @@
-import { Elysia } from 'elysia';
-import { HealthService } from './health.service';
-import type { Redis } from 'ioredis';
-import type { Client as MinioClient } from 'minio';
+import { Elysia, t } from "elysia";
+import { getHealthStatus } from "./health.service";
 
-export const healthRoutes = (redis: Redis, minio: MinioClient) => {
-  const healthService = new HealthService(redis, minio);
-
-  return new Elysia({ prefix: '/health', tags: ['Health'] })
-    .get('/', async () => {
-      return await healthService.check();
-    });
+export const healthRoutes = () => {
+  return new Elysia({ prefix: "/health", tags: ["Health"] }).get(
+    "/",
+    getHealthStatus(),
+    {
+      response: t.Object({
+        status: t.Union([t.Literal("ok"), t.Literal("error")]),
+        timestamp: t.String(),
+      }),
+    },
+  );
 };

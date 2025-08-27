@@ -10,4 +10,5 @@ export const env = {
   MINIO_ACCESS_KEY: process.env.MINIO_ACCESS_KEY || 'minioadmin',
   MINIO_SECRET_KEY: process.env.MINIO_SECRET_KEY || 'minioadmin',
   MINIO_USE_SSL: process.env.MINIO_USE_SSL === 'true',
+  MINIO_BUCKET_NAME: process.env.MINIO_BUCKET_NAME || 'uploads',
 };

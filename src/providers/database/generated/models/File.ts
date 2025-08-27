@@ -30,14 +30,14 @@ export type FileAvgAggregateOutputType = {
 }
 
 export type FileSumAggregateOutputType = {
-  fileSize: bigint | null
+  fileSize: number | null
 }
 
 export type FileMinAggregateOutputType = {
   id: string | null
   filename: string | null
   filetype: string | null
-  fileSize: bigint | null
+  fileSize: number | null
   minioKey: string | null
   uploadStatus: $Enums.FileUploadStatus | null
   createdAt: Date | null
@@ -48,7 +48,7 @@ export type FileMaxAggregateOutputType = {
   id: string | null
   filename: string | null
   filetype: string | null
-  fileSize: bigint | null
+  fileSize: number | null
   minioKey: string | null
   uploadStatus: $Enums.FileUploadStatus | null
   createdAt: Date | null
@@ -200,7 +200,7 @@ export type FileGroupByOutputType = {
   id: string
   filename: string
   filetype: string
-  fileSize: bigint
+  fileSize: number
   minioKey: string
   uploadStatus: $Enums.FileUploadStatus
   createdAt: Date
@@ -234,7 +234,7 @@ export type FileWhereInput = {
   id?: Prisma.UuidFilter<"File"> | string
   filename?: Prisma.StringFilter<"File"> | string
   filetype?: Prisma.StringFilter<"File"> | string
-  fileSize?: Prisma.BigIntFilter<"File"> | bigint | number
+  fileSize?: Prisma.IntFilter<"File"> | number
   minioKey?: Prisma.StringFilter<"File"> | string
   uploadStatus?: Prisma.EnumFileUploadStatusFilter<"File"> | $Enums.FileUploadStatus
   createdAt?: Prisma.DateTimeFilter<"File"> | Date | string
@@ -262,7 +262,7 @@ export type FileWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.FileWhereInput | Prisma.FileWhereInput[]
   filename?: Prisma.StringFilter<"File"> | string
   filetype?: Prisma.StringFilter<"File"> | string
-  fileSize?: Prisma.BigIntFilter<"File"> | bigint | number
+  fileSize?: Prisma.IntFilter<"File"> | number
   uploadStatus?: Prisma.EnumFileUploadStatusFilter<"File"> | $Enums.FileUploadStatus
   createdAt?: Prisma.DateTimeFilter<"File"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"File"> | Date | string
@@ -292,7 +292,7 @@ export type FileScalarWhereWithAggregatesInput = {
   id?: Prisma.UuidWithAggregatesFilter<"File"> | string
   filename?: Prisma.StringWithAggregatesFilter<"File"> | string
   filetype?: Prisma.StringWithAggregatesFilter<"File"> | string
-  fileSize?: Prisma.BigIntWithAggregatesFilter<"File"> | bigint | number
+  fileSize?: Prisma.IntWithAggregatesFilter<"File"> | number
   minioKey?: Prisma.StringWithAggregatesFilter<"File"> | string
   uploadStatus?: Prisma.EnumFileUploadStatusWithAggregatesFilter<"File"> | $Enums.FileUploadStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"File"> | Date | string
@@ -303,7 +303,7 @@ export type FileCreateInput = {
   id?: string
   filename: string
   filetype: string
-  fileSize: bigint | number
+  fileSize: number
   minioKey: string
   uploadStatus?: $Enums.FileUploadStatus
   createdAt?: Date | string
@@ -315,7 +315,7 @@ export type FileUncheckedCreateInput = {
   id?: string
   filename: string
   filetype: string
-  fileSize: bigint | number
+  fileSize: number
   minioKey: string
   uploadStatus?: $Enums.FileUploadStatus
   createdAt?: Date | string
@@ -327,7 +327,7 @@ export type FileUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   filename?: Prisma.StringFieldUpdateOperationsInput | string
   filetype?: Prisma.StringFieldUpdateOperationsInput | string
-  fileSize?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   minioKey?: Prisma.StringFieldUpdateOperationsInput | string
   uploadStatus?: Prisma.EnumFileUploadStatusFieldUpdateOperationsInput | $Enums.FileUploadStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -339,7 +339,7 @@ export type FileUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   filename?: Prisma.StringFieldUpdateOperationsInput | string
   filetype?: Prisma.StringFieldUpdateOperationsInput | string
-  fileSize?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   minioKey?: Prisma.StringFieldUpdateOperationsInput | string
   uploadStatus?: Prisma.EnumFileUploadStatusFieldUpdateOperationsInput | $Enums.FileUploadStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -351,7 +351,7 @@ export type FileCreateManyInput = {
   id?: string
   filename: string
   filetype: string
-  fileSize: bigint | number
+  fileSize: number
   minioKey: string
   uploadStatus?: $Enums.FileUploadStatus
   createdAt?: Date | string
@@ -362,7 +362,7 @@ export type FileUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   filename?: Prisma.StringFieldUpdateOperationsInput | string
   filetype?: Prisma.StringFieldUpdateOperationsInput | string
-  fileSize?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   minioKey?: Prisma.StringFieldUpdateOperationsInput | string
   uploadStatus?: Prisma.EnumFileUploadStatusFieldUpdateOperationsInput | $Enums.FileUploadStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -373,7 +373,7 @@ export type FileUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   filename?: Prisma.StringFieldUpdateOperationsInput | string
   filetype?: Prisma.StringFieldUpdateOperationsInput | string
-  fileSize?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   minioKey?: Prisma.StringFieldUpdateOperationsInput | string
   uploadStatus?: Prisma.EnumFileUploadStatusFieldUpdateOperationsInput | $Enums.FileUploadStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -430,12 +430,12 @@ export type StringFieldUpdateOperationsInput = {
   set?: string
 }
 
-export type BigIntFieldUpdateOperationsInput = {
-  set?: bigint | number
-  increment?: bigint | number
-  decrement?: bigint | number
-  multiply?: bigint | number
-  divide?: bigint | number
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
 export type EnumFileUploadStatusFieldUpdateOperationsInput = {
@@ -464,7 +464,7 @@ export type FileCreateWithoutPermissionsInput = {
   id?: string
   filename: string
   filetype: string
-  fileSize: bigint | number
+  fileSize: number
   minioKey: string
   uploadStatus?: $Enums.FileUploadStatus
   createdAt?: Date | string
@@ -475,7 +475,7 @@ export type FileUncheckedCreateWithoutPermissionsInput = {
   id?: string
   filename: string
   filetype: string
-  fileSize: bigint | number
+  fileSize: number
   minioKey: string
   uploadStatus?: $Enums.FileUploadStatus
   createdAt?: Date | string
@@ -502,7 +502,7 @@ export type FileUpdateWithoutPermissionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   filename?: Prisma.StringFieldUpdateOperationsInput | string
   filetype?: Prisma.StringFieldUpdateOperationsInput | string
-  fileSize?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   minioKey?: Prisma.StringFieldUpdateOperationsInput | string
   uploadStatus?: Prisma.EnumFileUploadStatusFieldUpdateOperationsInput | $Enums.FileUploadStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -513,7 +513,7 @@ export type FileUncheckedUpdateWithoutPermissionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   filename?: Prisma.StringFieldUpdateOperationsInput | string
   filetype?: Prisma.StringFieldUpdateOperationsInput | string
-  fileSize?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
   minioKey?: Prisma.StringFieldUpdateOperationsInput | string
   uploadStatus?: Prisma.EnumFileUploadStatusFieldUpdateOperationsInput | $Enums.FileUploadStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -614,7 +614,7 @@ export type $FilePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     id: string
     filename: string
     filetype: string
-    fileSize: bigint
+    fileSize: number
     minioKey: string
     uploadStatus: $Enums.FileUploadStatus
     createdAt: Date
@@ -1046,7 +1046,7 @@ export interface FileFieldRefs {
   readonly id: Prisma.FieldRef<"File", 'String'>
   readonly filename: Prisma.FieldRef<"File", 'String'>
   readonly filetype: Prisma.FieldRef<"File", 'String'>
-  readonly fileSize: Prisma.FieldRef<"File", 'BigInt'>
+  readonly fileSize: Prisma.FieldRef<"File", 'Int'>
   readonly minioKey: Prisma.FieldRef<"File", 'String'>
   readonly uploadStatus: Prisma.FieldRef<"File", 'FileUploadStatus'>
   readonly createdAt: Prisma.FieldRef<"File", 'DateTime'>

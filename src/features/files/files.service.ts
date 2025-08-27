@@ -1,12 +1,13 @@
 import { FilesRepository } from "./files.repository";
 import { FileSchema } from "./files.schema";
+import { minio } from "../../providers/minio/minio.provider";
+import { env } from "../../shared/config/env";
 
 export namespace FilesService {
-	export function create(
-		file: Pick<FileSchema, "filename" | "filetype" | "fileSize">,
+	export async function create(
+		file: Pick<FileSchema, "filename" | "filetype" | "fileSize" | "minioKey">,
 	) {
 		const newFilename = Bun.randomUUIDv7();
-
 		const isLargerThan50Mb = file.fileSize > 50 * 1024 * 1024;
 		if (isLargerThan50Mb) {
 			throw new Error("File size cannot be larger than 50MB");
@@ -33,7 +34,12 @@ export namespace FilesService {
 		return FilesRepository.update(fileId, file);
 	}
 
-	export function deleteById(fileId: string) {
+	export async function deleteById(fileId: string) {
+		const file = await FilesRepository.findById(fileId);
+		if (!file) {
+			throw new Error("File not found");
+		}
+		await minio.removeObject(env.MINIO_BUCKET_NAME, file.minioKey);
 		return FilesRepository.deleteById(fileId);
 	}
 }
