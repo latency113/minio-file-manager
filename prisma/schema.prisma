@@ -19,7 +19,6 @@ model File {
   filename     String           @db.VarChar(255)
   filetype     String           @db.VarChar(100)
   fileSize     Int              
-  minioKey     String           @unique @db.VarChar(500)
   uploadStatus FileUploadStatus @default(PENDING)
   createdAt    DateTime         @default(now()) @db.Timestamp(6)
   updatedAt    DateTime         @updatedAt @db.Timestamp(6)

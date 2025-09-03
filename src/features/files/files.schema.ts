@@ -8,7 +8,6 @@ export const fileSchema = t.Object({
 	filename: t.String(),
 	filetype: t.String(),
 	fileSize: t.Number(),
-	minioKey: t.String(),
 	uploadStatus: t.UnionEnum(["PENDING", "COMPLETED", "FAILED"]),
 	createdAt: t.Date(),
 	updatedAt: t.Date(),

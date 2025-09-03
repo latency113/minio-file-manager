@@ -682,7 +682,6 @@ export const FileScalarFieldEnum = {
   filename: 'filename',
   filetype: 'filetype',
   fileSize: 'fileSize',
-  minioKey: 'minioKey',
   uploadStatus: 'uploadStatus',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
