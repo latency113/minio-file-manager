@@ -1,0 +1,9 @@
+http://myweb.com {
+
+  forward_auth host.docker.internal:3001 {
+		uri /auth/me
+		copy_headers x-user-id x-user-roles x-user-name x-user-tel
+	}
+
+	reverse_proxy host.docker.internal:3000
+}

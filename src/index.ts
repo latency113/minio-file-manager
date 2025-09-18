@@ -2,7 +2,6 @@ import "dotenv/config";
 import { Elysia } from "elysia";
 import { swagger } from "@elysiajs/swagger";
 import { app as appRoutes } from "./features/app";
-import { minio, redis } from "./providers";
 import { corsMiddleware } from "./shared/middleware/cors";
 import { errorHandler } from "./shared/middleware/error-handler";
 import { loggerMiddleware } from "./shared/middleware/logger";
@@ -27,7 +26,7 @@ const app = new Elysia()
 	)
 	.use(FilesController.filesController)
 	.get("/", () => "Hello Elysia")
-	.use(appRoutes(redis, minio))
+	.use(appRoutes())
 	.listen(env.APP_PORT);
 
 console.log(
