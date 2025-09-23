@@ -13,8 +13,7 @@ export namespace FilesRepository {
   }
 
   export async function findAll(options: { skip: number; take: number; search?: string }) {
-    const where = options.search
-      ?
+    const where = options.search?
       {
           filename: {
             contains: options.search,
